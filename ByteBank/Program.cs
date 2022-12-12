@@ -12,14 +12,15 @@ namespace ByteBank
         {
             try
             {
-                ContaCorrente conta1 = new ContaCorrente(0, 0);
+                ContaCorrente conta1 = new ContaCorrente(10, 0);
             }
             catch (ArgumentException e)
             {
+                Console.WriteLine($"Erro no parâmetro: {e.ParamName}");
                 Console.WriteLine("Ocorreu um erro do tipo ArgumentException");
                 Console.WriteLine(e.Message);
             }
-            Console.WriteLine(ContaCorrente.TaxaOperacao);
+            //Console.WriteLine(ContaCorrente.TaxaOperacao);
 
             Console.ReadKey();
         }
