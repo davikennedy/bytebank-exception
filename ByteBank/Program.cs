@@ -17,7 +17,7 @@ namespace ByteBank
             catch (ArgumentException e)
             {
                 Console.WriteLine($"Erro no parâmetro: {e.ParamName}");
-                Console.WriteLine("Ocorreu um erro do tipo ArgumentException");
+                //Console.WriteLine("Ocorreu um erro do tipo ArgumentException");
                 Console.WriteLine(e.Message);
             }
             //Console.WriteLine(ContaCorrente.TaxaOperacao);

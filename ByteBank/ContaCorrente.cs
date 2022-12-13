@@ -7,11 +7,6 @@ namespace ByteBank
     {
         public ContaCorrente(int agencia, int numero)
         {
-            Agencia = agencia;
-            Numero = numero;
-
-            //TaxaOperacao = 30 / TotalDeContasCriadas;
-            
             if (agencia <= 0)
             {
                 throw new ArgumentException("O argumento 'agencia' deve ser maior do que 0.", nameof(agencia));
@@ -20,33 +15,16 @@ namespace ByteBank
             {
                 throw new ArgumentException("O argumento 'numero' deve ser maior do que 0.", nameof(numero));
             }
+
+            Agencia = agencia;
+            Numero = numero;
             
+            TaxaOperacao = 30 / TotalDeContasCriadas;
             TotalDeContasCriadas++;
         }
         public Cliente Titular { get; set; }
 
-        public static double TaxaOperacao { get; private set; }
-        public static int TotalDeContasCriadas { get; private set; }
-
-
-        private int _agencia;
-        public int Agencia
-        {
-            get
-            {
-                return _agencia;
-            }
-            private set
-            {
-                if (value <= 0)
-                {
-                    return;
-                }
-
-                _agencia = value;
-            }
-        }
-
+        public int Agencia { get; }
         public int Numero { get; }
 
         private double _saldo = 100;
@@ -95,5 +73,8 @@ namespace ByteBank
             contaDestino.Depositar(valor);
             return true;
         }
+
+        public static double TaxaOperacao { get; private set; }
+        public static int TotalDeContasCriadas { get; private set; }
     }
 }
