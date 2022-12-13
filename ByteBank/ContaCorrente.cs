@@ -1,5 +1,4 @@
-﻿// using _05_ByteBank;
-using System;
+﻿using System;
 
 namespace ByteBank
 {
@@ -19,8 +18,8 @@ namespace ByteBank
             Agencia = agencia;
             Numero = numero;
             
-            TaxaOperacao = 30 / TotalDeContasCriadas;
-            TotalDeContasCriadas++;
+            //TaxaOperacao = 30 / TotalDeContasCriadas;
+            //TotalDeContasCriadas++;
         }
         public Cliente Titular { get; set; }
 
@@ -46,15 +45,15 @@ namespace ByteBank
             }
         }
 
-        public bool Sacar(double valor)
+        public void Sacar(double valor)
         {
             if (_saldo < valor)
             {
-                return false;
+                throw new SaldoInsuficienteException($"Saldo insuficiente para saque no valor de {valor:C}\n" +
+                    $"Você não tem todo o dinheiro que imagina!");
             }
 
             _saldo -= valor;
-            return true;
         }
 
         public void Depositar(double valor)
