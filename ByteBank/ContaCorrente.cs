@@ -26,6 +26,8 @@ namespace ByteBank
 
         public int Agencia { get; }
         public int Numero { get; }
+        public int ContadorSaquesNaoPermitidos { get; set; }
+        public int ContadorTransferenciasNaoPermitidas { get; set; }
 
         private double _saldo = 100;
 
@@ -50,10 +52,12 @@ namespace ByteBank
         {
             if (valor < 0)
             {
+                ContadorSaquesNaoPermitidos++;
                 throw new ArgumentException("Valor de saque não pode ser negativo", nameof(valor));
             }
             if (_saldo < valor)
             {
+                ContadorSaquesNaoPermitidos++;
                 throw new SaldoInsuficienteException($"Saldo insuficiente para saque no valor de {valor:C}\n" +
                     $"Você não tem todo o dinheiro que imagina!");
             }
@@ -68,17 +72,28 @@ namespace ByteBank
 
         public void Transferir(double valor, ContaCorrente contaDestino)
         {
-            if (valor < 0)
+            try
             {
+                Sacar(valor);
+            }
+            catch (SaldoInsuficienteException e)
+            {
+                ContadorTransferenciasNaoPermitidas++;
+                throw new OperacaoFinanceiraException("Operação não realizada.", e);
+            }
+/*            if (valor < 0)
+            {
+                ContadorTransferenciasNaoPermitidas++;
                 throw new ArgumentException("Valor inválido para a transferência.", nameof(valor));
             }
             if (_saldo < valor)
             {
+                ContadorTransferenciasNaoPermitidas++;
                 throw new SaldoInsuficienteException($"Saldo insuficiente para transferência no valor de {valor:C}\n" +
                     $"Você não tem todo o dinheiro que imagina!");
             }
 
-            Sacar(valor);
+            Sacar(valor);*/
             contaDestino.Depositar(valor);
         }
 
