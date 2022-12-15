@@ -26,8 +26,8 @@ namespace ByteBank
 
         public int Agencia { get; }
         public int Numero { get; }
-        public int ContadorSaquesNaoPermitidos { get; set; }
-        public int ContadorTransferenciasNaoPermitidas { get; set; }
+        public int ContadorSaquesNaoPermitidos { get; private set; }
+        public int ContadorTransferenciasNaoPermitidas { get; private set; }
 
         private double _saldo = 100;
 
