@@ -6,7 +6,10 @@ namespace ByteBank
     {
         static void Main(string[] args)
         {
-            try
+            CarregarContas();
+            Console.ReadLine();
+                        
+            /*try
             {
                 ContaCorrente conta1 = new ContaCorrente(25123, 1350);
                 ContaCorrente conta2 = new ContaCorrente(1243, 14256);
@@ -34,9 +37,18 @@ namespace ByteBank
                 Console.WriteLine(e.InnerException.StackTrace);
                 //Console.WriteLine("Exceção do tipo SaldoInsuficienteException.");
             }
-            //Console.WriteLine(ContaCorrente.TaxaOperacao);
+            //Console.WriteLine(ContaCorrente.TaxaOperacao);*/
 
             Console.ReadKey();
+        }
+        private static void CarregarContas()
+        {
+            LeitorDeArquivo leitor = new LeitorDeArquivo("contas.txt");
+            leitor.LerProximaLinha();
+            leitor.LerProximaLinha();
+            leitor.LerProximaLinha();
+
+            leitor.Fechar();
         }
     }
 }
