@@ -42,18 +42,20 @@ namespace ByteBank
         }
         private static void CarregarContas()
         {
+            LeitorDeArquivo leitor = new LeitorDeArquivo("contas.txt");
             try
-            {
-                LeitorDeArquivo leitor = new LeitorDeArquivo("contas.txt");
+            { 
                 leitor.LerProximaLinha();
                 leitor.LerProximaLinha();
                 leitor.LerProximaLinha();
-
-                leitor.Fechar();
             }
             catch (IOException)
             {
                 Console.WriteLine("Exceção do tipo IOException capturada e tratada!");
+            }
+            finally
+            {
+                leitor.Fechar();
             }
         }
     }
