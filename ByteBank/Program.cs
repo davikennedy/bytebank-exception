@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace ByteBank
 {
@@ -38,17 +39,22 @@ namespace ByteBank
                 //Console.WriteLine("Exceção do tipo SaldoInsuficienteException.");
             }
             //Console.WriteLine(ContaCorrente.TaxaOperacao);*/
-
-            Console.ReadKey();
         }
         private static void CarregarContas()
         {
-            LeitorDeArquivo leitor = new LeitorDeArquivo("contas.txt");
-            leitor.LerProximaLinha();
-            leitor.LerProximaLinha();
-            leitor.LerProximaLinha();
+            try
+            {
+                LeitorDeArquivo leitor = new LeitorDeArquivo("contas.txt");
+                leitor.LerProximaLinha();
+                leitor.LerProximaLinha();
+                leitor.LerProximaLinha();
 
-            leitor.Fechar();
+                leitor.Fechar();
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("Exceção do tipo IOException capturada e tratada!");
+            }
         }
     }
 }
